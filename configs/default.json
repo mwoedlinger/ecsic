@@ -1,0 +1,57 @@
+{
+    "project": "ecisc_wacv2024",
+    "entity": "aistream",
+    "epochs": 500,
+    "lmda": 0.01,
+    "lr": 1e-4,
+    "batch_size": 1,
+    "lr_drop": 2000000,
+    "eps": 1e-9,
+    "eval_steps": 20000,
+    "seed": 0,
+    "log_images": true,
+
+    "device": null,
+    "run_id": null,
+    "debug": null,
+    "exp_name": null,
+    "exp_path": null,
+    "config": null,
+    "tags": [],
+
+    "optimizer": {
+        "name": "Adam",
+        "kwargs": {}
+    },
+
+    "scheduler": {
+        "name": "ExponentialLR",
+        "kwargs": {
+            "gamma": 0.1
+        }
+    },
+
+    "model": {
+        "name": "DebugModel",
+        "kwargs": {}
+    },
+
+    "train": {
+        "root": "./data",
+        "name": "cityscapes",
+        "debug": false
+    },
+
+    "eval": {
+        "root": "./data",
+        "name": "cityscapes",
+        "debug": false
+    },
+
+    "test": {
+        "root": "./data",
+        "name": "cityscapes",
+        "debug": false
+    }
+
+}

@@ -1,0 +1,38 @@
+{
+    "project": "ecisc_wacv2024",
+    "exp_name": "cs/ecsic_m48",
+    "entity": "aistream",
+    "epochs": 450,
+    "lmda": 0.01,
+    "lr": 1e-4,
+    "lr_drop": 1000000,
+    "batch_size": 1,
+    "eval_steps": 50000,
+
+    "model": {
+        "name": "StereoAttentionModelPlus",
+        "kwargs": {
+            "N": 192,
+            "M": 48
+        }
+    },
+
+    "train": {
+        "root": "./data",
+        "name": "cityscapes",
+        "debug": false
+    },
+
+    "eval": {
+        "root": "./data",
+        "name": "cityscapes",
+        "debug": false
+    },
+
+    "test": {
+        "root": "./data",
+        "name": "cityscapes",
+        "debug": false
+    }
+
+}

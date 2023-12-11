@@ -1,0 +1,38 @@
+{
+    "project": "ecisc_wacv2024",
+    "exp_name": "is/ecsic_m48",
+    "entity": "aistream",
+    "epochs": 650,
+    "lmda": 0.01,
+    "lr": 1e-4,
+    "lr_drop": 1000000,
+    "batch_size": 1,
+    "eval_steps": 50000,
+
+    "model": {
+        "name": "StereoAttentionModelPlus",
+        "kwargs": {
+            "N": 192,
+            "M": 48
+        }
+    },
+
+    "train": {
+        "root": "./data",
+        "name": "instereo2k",
+        "debug": false
+    },
+
+    "eval": {
+        "root": "./data",
+        "name": "instereo2k",
+        "debug": false
+    },
+
+    "test": {
+        "root": "./data",
+        "name": "instereo2k",
+        "debug": false
+    }
+
+}

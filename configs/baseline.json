@@ -1,0 +1,18 @@
+{
+    "exp_name": "baseline",
+    "project": "ecisc_wacv2024",
+    "entity": "aistream",
+    "epochs": 500,
+    "lmda": 0.01,
+    "lr": 1e-4,
+    "batch_size": 1,
+    "eval_steps": 20000,
+
+    "model": {
+        "name": "StereoBaseline",
+        "kwargs": {
+            "M": 48
+        }
+    }
+
+}
