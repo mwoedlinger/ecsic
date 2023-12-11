@@ -209,9 +209,6 @@ def copy_files(exp_path, root='.', src='sa', data='data'):
     copytree(src, dst / src)
     copytree(data, dst / data)
 
-    print(data)
-    print(dst / data)
-
     remaining_files = [f for f in Path(root).iterdir() if f.suffix == '.py']
 
     for file in remaining_files:
