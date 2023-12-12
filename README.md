@@ -36,6 +36,8 @@ The program will then perform full train/test runs for all specified lmda values
 
 ![image](./assets/rd_curves.svg "Rate distortion curves on Cityscapes and Instereo2k")
 
+Weights to reproduce these curves are available via [google drive](https://drive.google.com/drive/folders/1ZHyAx4XmVRUAZDDS3PzmMOTEA1xKQOuc?usp=sharing).
+
 ## Citation
 If you use this project please cite our work
 
