@@ -32,6 +32,10 @@ Use generate_rd_curve.py to generate rate distortion curves. For this specifiy a
 
 The program will then perform full train/test runs for all specified lmda values and store the results in a json file in `experiments/RD_curves/exp_name/results.json` and the model weights for the run with lambda=lmda in `experiments/RD_curves/exp_name/lmda`.
 
+## RD Curves
+
+![image](./assets/rd_curves.svg "Rate distortion curves on Cityscapes and Instereo2k")
+
 ## Citation
 If you use this project please cite our work
 
