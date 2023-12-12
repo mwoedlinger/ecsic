@@ -3,6 +3,8 @@ Official code of our upcoming WACV paper "ECSIC: Epipolar Cross Attention for St
 
 ![image](./assets/001860.png "Qualitative comparison for a sample from the InStereo2k dataset")
 
+Check out the preprint on **[arxiv](https://arxiv.org/abs/2307.10284)**.
+
 ## Installation
 
 Install the necessary packages from the `requirements.txt` file with pip:
