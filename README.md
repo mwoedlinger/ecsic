@@ -21,7 +21,7 @@ Test a model with test.py. Example:
 
 ```python test.py gpu_idx exp_name --resume_dir experiments/RD_curves/cs/0.01/```
 
-where `gpu_idx` and `exp_name` need to be specified and `resume_dir` can be set to any path with a config file `config.json` and weights file `model.pt` in it.
+where `gpu_idx` and `exp_name` need to be specified and `resume_dir` can be set to any path with a config file `config.json` and weights file `model.pt` in it. Weights of trained models are available for download [here](https://drive.google.com/drive/folders/1ZHyAx4XmVRUAZDDS3PzmMOTEA1xKQOuc?usp=sharing). If the folder is copied to the project root the command above should replicate the results from our paper on Cityscapes for lambda=0.01 (bpp=0.089, psnr=38.56).
 
 ## Generate RD curves
 Use generate_rd_curve.py to generate rate distortion curves. For this specifiy a list of lambda values in the command line as a string. E.g.:
