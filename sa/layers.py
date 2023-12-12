@@ -6,11 +6,7 @@ import math
 from .utils import aij
 
 __all__ = ['MaskedConv2d', 'PositionalEncoding2D', 'PositionalEncoding1D', 'Stereo', 
-           'StereoAttentionModule', 'ECALayer', 'HorizontalMaskedConv2d', 'StereoSequential']
-
-# TODO:
-# -) Deformable Convolutions (https://paperswithcode.com/method/deformable-convolution)
-# -) Channel attention (https://paperswithcode.com/method/channel-attention)
+           'StereoAttentionModule', 'HorizontalMaskedConv2d', 'StereoSequential']
 
 class HorizontalMaskedConv2d(nn.Conv2d):
     """
@@ -335,54 +331,3 @@ class StereoSequential(nn.Sequential):
         else:
             return l, r
 
-# For GFLOP count:
-# class StereoSequential(nn.Module):
-#     def __init__(self, *args):
-#         super().__init__()
-
-#         self.modules = args
-        
-#     def forward(self, l, r, return_attn=False, *args, **kwargs):
-#         A_rtl = []
-#         A_ltr = []
-
-#         for module in self.modules:
-#             if isinstance(module, StereoAttentionModule):
-#                 module_out = module(l, r, *args, **kwargs)
-
-#                 l, r = module_out[:2]
-#                 A_rtl.append(module_out[2])
-#                 A_ltr.append(module_out[3])
-#             else:
-#                 l, r = module(l, r)
-        
-#         if return_attn:
-#             return l, r, A_rtl, A_ltr
-#         else:
-#             return l, r
-
-# Adapted from https://github.com/BangguWu/ECANet/blob/master/models/eca_module.py
-class ECALayer(nn.Module):
-    """Constructs a ECA module.
-    Args:
-        k_size: Adaptive selection of kernel size
-    """
-    def __init__(self, k_size=3):
-        super(ECALayer, self).__init__()
-        
-        self.avg_pool = nn.AdaptiveAvgPool2d(1)
-        self.conv = nn.Conv1d(1, 1, kernel_size=k_size, padding=(k_size - 1) // 2, bias=False) 
-        self.sigmoid = nn.Sigmoid()
-
-    def forward(self, x):
-        # feature descriptor on the global spatial information
-        y = self.avg_pool(x)
-
-        # Two different branches of ECA module
-        y = self.conv(y.squeeze(-1).transpose(-1, -2)).transpose(-1, -2).unsqueeze(-1)
-
-        # Multi-scale information fusion
-        y = self.sigmoid(y)
-
-        return x * y.expand_as(x)
-        

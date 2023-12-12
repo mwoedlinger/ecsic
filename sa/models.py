@@ -10,6 +10,10 @@ __all__ = ['DebugModel', 'StereoBaseline', 'StereoAttentionModelPlus']
 
 
 class StereoBaseline(nn.Module):
+    """
+    Baseline model for stereo image compression. Encoder/decoder with hyperprior entropy model. 
+    Left and right image are compressed separately. Is used as base class for ECSIC.
+    """
 
     def __init__(self, in_channels=3, N=192, M=12):
         super().__init__()
