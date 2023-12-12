@@ -1,6 +1,8 @@
 # ECISC
 Official code of our upcoming WACV paper "ECSIC: Epipolar Cross Attention for Stereo Image Compression" by Matthias Wödlinger, Jan Kotera, Manuel Keglevic, Jan Xu and Robert Sablatnig.
 
+![image](./assets/001860.png "Qualitative comparison for a sample from the InStereo2k dataset")
+
 ## Installation
 
 Install the necessary packages from the `requirements.txt` file with pip:
@@ -21,16 +23,12 @@ Test a model with test.py. Example:
 
 where `gpu_idx` and `exp_name` need to be specified and `resume_dir` can be set to any path with a config file `config.json` and weights file `model.pt` in it.
 
-## Rate distortion curves
+## Generate RD curves
 Use generate_rd_curve.py to generate rate distortion curves. For this specifiy a list of lambda values in the command line as a string. E.g.:
 
 ```python generate_rd_curve.py gpu_dix exp_name --config configs/rd_cs_ecsic_m48.json --lmda "0.001, 0.01, 0.1"```
 
 The program will then perform full train/test runs for all specified lmda values and store the results in a json file in `experiments/RD_curves/exp_name/results.json` and the model weights for the run with lambda=lmda in `experiments/RD_curves/exp_name/lmda`.
-
-## Example
-More examples can be found in our [paper](https://arxiv.org/abs/2307.10284).
-![image](./assets/001860.png "Qualitative comparison for a sample from the InStereo2k dataset")
 
 ## Citation
 If you use this project please cite our work
