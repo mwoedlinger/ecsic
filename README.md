@@ -1,4 +1,4 @@
-# ECISC
+# ECSIC
 Official code of our upcoming WACV paper "ECSIC: Epipolar Cross Attention for Stereo Image Compression" by Matthias Wödlinger, Jan Kotera, Manuel Keglevic, Jan Xu and Robert Sablatnig.
 
 ![image](./assets/001860.png "Qualitative comparison for a sample from the InStereo2k dataset")
