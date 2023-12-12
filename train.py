@@ -1,10 +1,10 @@
 __all__ = ['experiment', 'train', 'evaluation']
 __author__ = "Matthias Wödlinger"
 
-import sa.models as models
-import sa.optimizers as optimizers
-import sa.schedulers as schedulers
-from sa import *
+import ecsic.models as models
+import ecsic.optimizers as optimizers
+import ecsic.schedulers as schedulers
+from ecsic import *
 
 import torch
 from torch.utils.data import DataLoader

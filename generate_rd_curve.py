@@ -1,8 +1,8 @@
 __all__ = []
 __author__ = "Matthias Wödlinger"
 
-import sa.models as models
-from sa import *
+import ecsic.models as models
+from ecsic import *
 from train import experiment
 import numpy as np
 import wandb

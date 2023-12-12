@@ -202,7 +202,7 @@ def pprint(c, indent=0):
         print('-'*45)
 
 
-def copy_files(exp_path, root='.', src='sa', data='data'):
+def copy_files(exp_path, root='.', src='ecsic', data='data'):
     dst = Path(exp_path) / 'src'
     dst.mkdir()
 
