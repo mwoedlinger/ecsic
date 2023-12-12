@@ -12,14 +12,14 @@ Train a new model with train.py. Example:
 
 ```python train.py gpu_idx exp_name --config configs/rd_cs_ecsic_m48.json --log_dir log_dir [--options]```
 
-The model weights are saved under `log_dir/experiments/HASH_DATE_TIME` (where HASH is added to prevent collisons for experiments with the same EXP_NAME). 
+`gpu_idx` and `exp_name` need to be specified. The model weights are saved under `log_dir/experiments/HASH_DATE_TIME` (where HASH is added to prevent collisons for experiments with the same EXP_NAME). 
 
 ## Testing
 Test a model with test.py. Example:
 
-```python test.py gpu_idx exp_name --resume_dir path/to/exp```
+```python test.py gpu_idx exp_name --resume_dir experiments/RD_curves/cs/0.01/```
 
-where `path/to/exp` is the directory that contains the model.pt file.
+where `gpu_idx` and `exp_name` need to be specified and `resume_dir` can be set to any path with a config file `config.json` and weights file `model.pt` in it.
 
 ## Rate distortion curves
 Use generate_rd_curve.py to generate rate distortion curves. For this specifiy a list of lambda values in the command line as a string. E.g.:

@@ -106,8 +106,7 @@ def _evaluation_step(left, right, pos, model, eval_logger, CFG):
     bpp_z = bpp_z_left + bpp_z_right
 
     # Computer RD-Loss
-    context_warping_loss = latents.context_warping_loss
-    warping_loss = latents.he_warping_loss + latents.hd_warping_loss + latents.d_warping_loss + latents.e_warping_loss
+    
     loss = (bpp + CFG.lmda * mse) / (1 + CFG.lmda)
 
     if CFG.log_images:
@@ -119,8 +118,7 @@ def _evaluation_step(left, right, pos, model, eval_logger, CFG):
 
     # Log scalars
     eval_logger.scalars(
-        he_warping_loss=latents.he_warping_loss, hd_warping_loss=latents.hd_warping_loss, e_warping_loss=latents.e_warping_loss, d_warping_loss=latents.d_warping_loss, ms_ssim=ms_ssim,
-        context_warping_loss=context_warping_loss, warping_loss=warping_loss, loss=loss, bpp=bpp, bpp_y=bpp_y, bpp_z=bpp_z, mse=mse, mse_left=mse_left, mse_right=mse_right, psnr=psnr
+        ms_ssim=ms_ssim, loss=loss, bpp=bpp, bpp_y=bpp_y, bpp_z=bpp_z, mse=mse, mse_left=mse_left, mse_right=mse_right, psnr=psnr
     )
 
 

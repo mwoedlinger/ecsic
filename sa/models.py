@@ -62,25 +62,6 @@ class StereoBaseline(nn.Module):
         self.zr_scale = nn.Parameter(torch.empty((1, M, 1, 1)))
         self.zr_scale.data.uniform_(1.0, 1.5)
 
-    def warping_loss(self, l, r, A_rtl, A_ltr):
-        if isinstance(A_rtl, list):
-            loss = 0
-            for a_rtl, a_ltr in zip(A_rtl, A_ltr):
-                loss += self.warping_loss(l, r, a_rtl, a_ltr)
-        else:    
-            h, _, _, w = A_ltr.shape
-            
-            l = F.interpolate(l, (h, w))  
-            r = F.interpolate(r, (h, w))    
-
-            rfl = torch.einsum('h a q w, b c h w -> b a c h q', [A_ltr, l]) # a ... attention heads
-            lfr = torch.einsum('h a q w, b c h w -> b a c h q', [A_rtl, r])
-            rfl = rfl.mean(1)
-            lfr = lfr.mean(1)
-            loss = nn.L1Loss()(r, rfl) + nn.L1Loss()(l, lfr)
-
-        return loss
-
     def entropy(self, yl, yr, pos=None):
         zl, zr, ahe_rtl, ahe_ltr = self.HE(yl, yr, pos=pos, return_attn=True)     
 
@@ -97,14 +78,7 @@ class StereoBaseline(nn.Module):
         yl_hat_ent, yl_hat_dec = quantise(yl, yl_loc, training=self.training)
         yr_hat_ent, yr_hat_dec = quantise(yr, yr_loc, training=self.training)
 
-        he_warping_loss = self.warping_loss(yl, yr, ahe_rtl, ahe_ltr)
-        hd_warping_loss = self.warping_loss(yl, yr, ahd_rtl, ahd_ltr)
-
         latents = Dict(
-            he_warping_loss=he_warping_loss,
-            hd_warping_loss=hd_warping_loss,
-            context_warping_loss=0,
-
             left = Dict(
                 y_hat_ent=yl_hat_ent,
                 y_hat_dec=yl_hat_dec,
@@ -143,9 +117,6 @@ class StereoBaseline(nn.Module):
         bpp_yl = calc_rate(latents.left.y_hat_ent, latents.left.y_loc, latents.left.y_scale)
         bpp_yr = calc_rate(latents.right.y_hat_ent, latents.right.y_loc, latents.right.y_scale)
 
-        latents.e_warping_loss = self.warping_loss(xl, xr, ae_rtl, ae_ltr)
-        latents.d_warping_loss = self.warping_loss(xl, xr, ad_rtl, ad_ltr)
-
         return Dict(
             latents=latents,
             rate=Dict(
@@ -168,7 +139,7 @@ class StereoBaseline(nn.Module):
 class StereoAttentionModelPlus(StereoBaseline):
 
     def __init__(self, in_channels=3, N=192, M=12, z_context=True, y_context=True, attn_mask=False, pos_encoding=False, 
-                 ln=True, shared=True, ff=True, valid_mask=None, rel_pos_enc=False, embed=None, heads=4):
+                 ln=True, shared=True, ff=True, valid_mask=None, rel_pos_enc=False, embed=None, heads=4, only_D=False):
         super().__init__(in_channels=in_channels, N=N, M=M)
 
         self.z_context = z_context
@@ -300,16 +271,8 @@ class StereoAttentionModelPlus(StereoBaseline):
             yr_loc, yr_scale = torch.chunk(yr_entropy, chunks=2, dim=1)
             ay_rtl, ay_ltr = [], []
         yr_hat_ent, yr_hat_dec = quantise(yr, yr_loc, training=self.training)
-        y_warping_loss = self.warping_loss(yl_hat_dec, yr_hat_dec, ay_ltr, ay_rtl)
-
-        he_warping_loss = self.warping_loss(yl, yr, ahe_rtl, ahe_ltr)
-        hd_warping_loss = self.warping_loss(yl, yr, ahd_rtl, ahd_ltr)
 
         latents = Dict(
-            he_warping_loss=he_warping_loss,
-            hd_warping_loss=hd_warping_loss,
-            context_warping_loss=y_warping_loss,
-
             left = Dict(
                 y_hat_ent=yl_hat_ent,
                 y_hat_dec=yl_hat_dec,
