@@ -1,0 +1,3 @@
+/path/to/eval/1_left.png, /path/to/eval/1_right.png
+/path/to/eval/2_left.png, /path/to/eval/2_right.png
+/path/to/eval/3_left.png, /path/to/eval/3_right.png

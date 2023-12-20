@@ -25,6 +25,10 @@ Test a model with test.py. Example:
 
 where `gpu_idx` and `exp_name` need to be specified and `resume_dir` can be set to any path with a config file `config.json` and weights file `model.pt` in it. Weights of trained models are available for download [here](https://drive.google.com/drive/folders/1ZHyAx4XmVRUAZDDS3PzmMOTEA1xKQOuc?usp=sharing). If the folder is copied to the project root the command above should replicate the results from our paper on Cityscapes for lambda=0.01 (bpp=0.089, psnr=38.56).
 
+## Data
+
+The data can be located anywhere you want, however the train and test scripts expect text files with paths to the data. ```data/load_cityscapes.py``` and ```data/load_instereo2k.py``` automatically create such text files for the Cityscapes and InStereo2k datasets. In case something does not work you can also create them by hand by creating ```train.txt```, ```eval.txt``` and ```test.txt``` where each line is ```left_image, right_image```. See ```data/DATASET_NAME``` for an example.
+
 ## Generate RD curves
 Use generate_rd_curve.py to generate rate distortion curves. For this specifiy a list of lambda values in the command line as a string. E.g.:
 

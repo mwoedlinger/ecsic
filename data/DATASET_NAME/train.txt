@@ -1,0 +1,3 @@
+/path/to/train/1_left.png, /path/to/train/1_right.png
+/path/to/train/2_left.png, /path/to/train/2_right.png
+/path/to/train/3_left.png, /path/to/train/3_right.png
