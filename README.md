@@ -1,9 +1,9 @@
 # ECSIC
-Official code of our upcoming WACV paper "ECSIC: Epipolar Cross Attention for Stereo Image Compression" by Matthias Wödlinger, Jan Kotera, Manuel Keglevic, Jan Xu and Robert Sablatnig.
+Official code of our WACV paper "ECSIC: Epipolar Cross Attention for Stereo Image Compression" by Matthias Wödlinger, Jan Kotera, Manuel Keglevic, Jan Xu and Robert Sablatnig.
 
 ![image](./assets/001860.png "Qualitative comparison for a sample from the InStereo2k dataset")
 
-Check out the preprint on **[arxiv](https://arxiv.org/abs/2307.10284)**.
+Check out the paper on **[arxiv](https://arxiv.org/abs/2307.10284)**.
 
 ## Installation
 
@@ -46,10 +46,11 @@ Weights to reproduce these curves are available via [google drive](https://drive
 If you use this project please cite our work
 
 ```
-@article{wodlinger2023ecsic,
+@inproceedings{wodlinger2024ecsic,
   title={ECSIC: Epipolar Cross Attention for Stereo Image Compression},
   author={W{\"o}dlinger, Matthias and Kotera, Jan and Keglevic, Manuel and Xu, Jan and Sablatnig, Robert},
-  journal={arXiv preprint arXiv:2307.10284},
-  year={2023}
+  booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  pages={3436--3445},
+  year={2024}
 }
 ```
